@@ -31,7 +31,7 @@ const Index = () => {
     <div className="relative min-h-screen">
       <FloatingNav />
 
-      <main className="relative">
+      <main className="relative main-content-shifted">
         <Hero />
         <About />
         <Skills />
