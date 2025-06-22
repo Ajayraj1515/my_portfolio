@@ -348,9 +348,37 @@ body {
   line-height: 1; /* Adjust line-height if needed to bring them closer vertically */
 }
 
+.hero-full-name {
+  display: flex; /* Use flexbox to keep the spans side-by-side */
+  align-items: baseline; /* Align them vertically */
+  flex-wrap: wrap; /* Allow names to wrap on smaller screens */
+  font-size: 60px; /* Base font size for the name */
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 20px; /* Space below the entire name block */
+}
+
+.hero-dhamoji {
+  display: inline-block;
+  margin-right: 25px; /* Space between "Dhamoji" and "Ajayraj Kattina" */
+  background: linear-gradient(to right, #10b981, #06b6d4); /* Your specific gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Styles for "Ajayraj Kattina" - will be solid white */
+.hero-ajayraj-kattina {
+  display: inline-block;
+  color: white; /* Solid white color */
+  /* You can add text-shadow or other effects here for a "typed feeling" if desired */
+  /* text-shadow: 0 0 5px rgba(255,255,255,0.5); */
+}
+
 .hero-name-primary {
     margin-right: 15px; /* Adjust spacing between "Dhamoji" and "Ajayraj" */
 }
+
 .hero-name {
   font-size: 80px;
   font-weight: bold;
@@ -377,7 +405,8 @@ body {
   width: 100%; /* Ensure it takes full width for proper left alignment */
   display: flex; /* Keep flex to center the text if it's shorter */
   justify-content: flex-start; /* Align text to the left */
-  align-items: center; /* Vertically center the text within its height */
+  align-items: center;
+  margin-bottom:30px; /* Vertically center the text within its height */
 }
 
 .hero-subtitle {
@@ -391,7 +420,8 @@ body {
 }
 
 .hero-contact {
-  margin-bottom: 32px;
+  width:100%;
+  margin-bottom: 30px;
 }
 
 .contact-item {
@@ -400,14 +430,15 @@ body {
   justify-content: flex-start; /* Align content to the left */
   margin-bottom: 12px;
   color: #d1d5db;
-  width: 100%; /* Take full width to respect parent's left alignment */
+  width: 100%;
+  font-size: 16px; /* Take full width to respect parent's left alignment */
 }
 
 .hero-buttons {
   display: flex;
-  gap: 16px;
+  gap: 28px;
   justify-content: flex-start; /* Align buttons to the left */
-  margin-top: 20px; /* Add some space above buttons */
+  margin-top: 30px; /* Add some space above buttons */
 }
 
 .hero-button {
@@ -441,7 +472,10 @@ body {
 
 .hero-image {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Center the image horizontally within its grid cell */
+  align-items: center; /* Vertically center the image within its grid cell */
+  position: relative;
+  width: 100%;
 }
 
 .image-container {
@@ -669,9 +703,9 @@ body {
 /* Skills Section */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
-  max-width: 1536px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -2397,7 +2431,8 @@ body {
   }
 
   .hero-buttons {
-    justify-content: center; /* Center buttons when text block is centered */
+    justify-content: center;
+    gap: 15px; /* Center buttons when text block is centered */
   }
   
   .hero-text {

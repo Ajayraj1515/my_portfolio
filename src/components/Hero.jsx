@@ -12,6 +12,8 @@ const Hero = () => {
         setTypedText(fullText.slice(0, index));
         index++;
       } else {
+        // Optional: Reset or loop the typing animation
+        // For now, it stops after typing once
         clearInterval(timer);
       }
     }, 100);
@@ -28,16 +30,18 @@ const Hero = () => {
         <div className="floating-element"></div>
       </div>
 
-      <div className="container"> {/* This container likely has margin: 0 auto; */}
-        <div className="hero-content"> {/* This is your main image + text grid */}
-          <div className="hero-text"> {/* This is the text content block */}
+      <div className="container">
+        <div className="hero-content">
+          <div className="hero-text">
             
-            {/* The main name section */}
+            {/* Updated Name Structure */}
             <h1 className="hero-full-name">
-              <span className="hero-name-gradient hero-first-name">Dhamoji</span>
-              <span className="hero-name-gradient hero-last-name">Ajayraj Kattina</span>
+              <span className="hero-name-gradient hero-dhamoji">Dhamoji</span>
+              {/* Added a new class for Ajayraj Kattina for distinct styling */}
+              <span className="hero-ajayraj-kattina">Ajayraj Kattina</span>
             </h1>
             
+            {/* The typing animation for "Passionate Software Developer" */}
             <div className="hero-typing">
               <p className="hero-subtitle">
                 {typedText}
@@ -45,6 +49,7 @@ const Hero = () => {
               </p>
             </div>
 
+            {/* Hero Contact Info */}
             <div className="hero-contact">
               <p className="contact-item">
                 📍 Nellore, Andhra Pradesh, 524344
@@ -57,6 +62,7 @@ const Hero = () => {
               </p>
             </div>
 
+            {/* Hero Buttons */}
             <div className="hero-buttons">
               <a
                 href="#projects"
@@ -73,7 +79,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* This is the image section */}
+          {/* Hero Image */}
           <div className="hero-image">
             <div className="image-container">
               <div className="image-rings"></div>
@@ -101,6 +107,7 @@ const Hero = () => {
           </div>
         </div>
 
+        {/* Scroll Indicator */}
         <div className="scroll-indicator">
           <ArrowDown size={32} />
         </div>
