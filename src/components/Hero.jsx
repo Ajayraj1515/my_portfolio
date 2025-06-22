@@ -2,24 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react'; // Make sure 'lucide-react' is installed
 
 const Hero = () => {
-  const [typedText, setTypedText] = useState('');
-  const fullText = "Passionate Software Developer";
+  // State for "Passionate Software Developer" typing
+  const [typedSubtitle, setTypedSubtitle] = useState('');
+  const fullSubtitleText = "Passionate Software Developer";
+
+  // State for "Ajayraj" typing
+  const [typedAjayraj, setTypedAjayraj] = useState('');
+  const fullAjayrajText = "Ajayraj"; // Just "Ajayraj" for the typing effect
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index));
-        index++;
+    let ajayrajIndex = 0;
+    const ajayrajTimer = setInterval(() => {
+      if (ajayrajIndex <= fullAjayrajText.length) {
+        setTypedAjayraj(fullAjayrajText.slice(0, ajayrajIndex));
+        ajayrajIndex++;
       } else {
-        // Optional: Reset or loop the typing animation
-        // For now, it stops after typing once
-        clearInterval(timer);
+        clearInterval(ajayrajTimer);
+        // Once Ajayraj is typed, start typing the subtitle
+        let subtitleIndex = 0;
+        const subtitleTimer = setInterval(() => {
+          if (subtitleIndex <= fullSubtitleText.length) {
+            setTypedSubtitle(fullSubtitleText.slice(0, subtitleIndex));
+            subtitleIndex++;
+          } else {
+            clearInterval(subtitleTimer);
+          }
+        }, 100); // Speed for subtitle typing
       }
-    }, 100);
+    }, 100); // Speed for Ajayraj typing
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      clearInterval(ajayrajTimer);
+      // Clean up subtitle timer if it was started
+      // Note: This relies on JavaScript's closure, the subtitleTimer variable
+      // will be defined in the scope of the outer effect.
+    };
+  }, []); // Run only once on mount
 
   return (
     <section id="hero" className="hero-section">
@@ -34,18 +52,21 @@ const Hero = () => {
         <div className="hero-content">
           <div className="hero-text">
             
-            {/* Updated Name Structure */}
+            {/* Updated Name Structure for typing "Ajayraj" */}
             <h1 className="hero-full-name">
               <span className="hero-name-gradient hero-dhamoji">Dhamoji</span>
-              {/* Added a new class for Ajayraj Kattina for distinct styling */}
-              <span className="hero-ajayraj-kattina">Ajayraj Kattina</span>
+              <span className="hero-typed-name">
+                {typedAjayraj}
+                <span className="typing-cursor">|</span> {/* Cursor for Ajayraj */}
+              </span>
+              <span className="hero-kattina-static">Kattina</span> {/* Static "Kattina" */}
             </h1>
             
             {/* The typing animation for "Passionate Software Developer" */}
             <div className="hero-typing">
               <p className="hero-subtitle">
-                {typedText}
-                <span className="typing-cursor">|</span>
+                {typedSubtitle} {/* Now using typedSubtitle for this text */}
+                <span className="typing-cursor">|</span> {/* Cursor for subtitle */}
               </p>
             </div>
 
