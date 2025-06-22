@@ -146,7 +146,7 @@ body {
 }
 
 .main-content-shifted {
-  margin-left: 96px; /* Adjust this value as needed based on your nav's actual width and desired spacing */
+  margin-left: 146px; /* Adjust this value as needed based on your nav's actual width and desired spacing */
   transition: margin-left 0.5s ease; /* Optional: for smooth transitions if nav hides/shows */
 }
 
