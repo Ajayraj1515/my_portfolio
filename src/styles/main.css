@@ -146,14 +146,23 @@ body {
 }
 
 .main-content-shifted {
-  margin-left:220px; /* Adjust this value as needed based on your nav's actual width and desired spacing */
-  transition: margin-left 0.5s ease; /* Optional: for smooth transitions if nav hides/shows */
+  margin-left: 220px; /* This pushes content right, away from the floating nav */
+  margin-right: auto; /* Combine with margin-left:auto on inner elements for centering */
+  padding-left: 2rem; /* Add some padding on the left inside the shifted area */
+  padding-right: 2rem; /* Add some padding on the right */
+  width: calc(100% - 220px); /* Adjust width to account for the fixed nav */
+  max-width: 1060px; /* (1280px - 220px) approx, ensures content doesn't go too wide */
+  box-sizing: border-box; /* Include padding in width calculation */
+  transition: margin-left 0.5s ease, width 0.5s ease;
 }
 
 @media (max-width: 768px) {
   .main-content-shifted {
-    margin-left: 0; /* Remove margin on smaller screens */
-    padding: 0; /* Add some default horizontal padding for content on small screens if needed */
+    margin-left: 0;
+    width: 100%;
+    padding-left: 1rem; /* Adjust padding for smaller screens */
+    padding-right: 1rem;
+    max-width: 100%; /* Allow full width on small screens */
   }
 }
 /* Floating Navigation */
@@ -1427,45 +1436,73 @@ body {
 }
 
 /* Learning Timeline Section - Fixed to horizontal layout */
+/* main.css */
+
+/* --- Learning Timeline Section - Alternating Left/Right Layout --- */
 .timeline-container {
-  max-width: 1200px;
+  max-width: 1000px; /* Adjusted max-width for better timeline flow */
   margin: 0 auto;
   position: relative;
+  padding: 40px 0; /* Add vertical padding for the timeline */
 }
 
+/* The central vertical line of the timeline */
 .timeline-line {
   position: absolute;
-  left: 32px;
+  width: 4px; /* Thickness of the line */
+  background: linear-gradient(to bottom, #8b5cf6, #3b82f6); /* Your gradient */
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+  left: 50%; /* Position line exactly in the middle of the container */
+  transform: translateX(-50%); /* Fine-tune centering */
+  z-index: 1; /* Keep line behind events */
+  border-radius: 2px;
 }
 
+/* Container for all events (no direct styling needed here for alternating layout) */
 .timeline-events {
-  margin-bottom: 48px;
+  /* This div mostly acts as a wrapper, no specific alternating styles here */
+  margin-bottom: 48px; /* Maintain margin below events */
 }
 
+/* Each individual timeline event */
 .timeline-event {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 48px;
+  display: flex; /* Use flexbox to control left/right alignment */
+  align-items: center; /* Vertically align the dot and content */
+  margin-bottom: 50px; /* Space between events */
+  z-index: 2; /* Ensure events are above the line */
 }
 
+/* Even-indexed events (0, 2, 4...) will be on the right side */
+.timeline-event:nth-child(even) {
+  flex-direction: row-reverse; /* Puts the dot (or left-most item) on the right */
+  justify-content: flex-start; /* Align content to the left of its half-width space */
+}
+
+/* Odd-indexed events (1, 3, 5...) will be on the left side */
+.timeline-event:nth-child(odd) {
+  flex-direction: row; /* Default order, dot on the left */
+  justify-content: flex-start; /* Align content to the left of its half-width space */
+}
+
+/* The interactive dot on the timeline line */
 .timeline-dot {
   position: absolute;
-  left: 32px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: linear-gradient(to right, #8b5cf6, #3b82f6);
-  border: 4px solid #0f172a;
+  background: linear-gradient(to right, #8b5cf6, #3b82f6); /* Your gradient */
+  border: 4px solid #0f172a; /* Matches your background color for contrast */
   z-index: 10;
-  transform: translateX(-50%);
-  margin-top: 20px;
+  left: 50%; /* Place dot on the central line */
+  transform: translateX(-50%); /* Center dot on the line */
+  /* margin-top: 20px; Removed, as align-items: center handles vertical alignment */
+  box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.2); /* Subtle pulse shadow */
+  transition: all 0.3s ease;
 }
 
+/* Pulse animation for the dot (keep as is) */
 .timeline-dot::before {
   content: '';
   position: absolute;
@@ -1475,25 +1512,104 @@ body {
   animation: pulse 2s infinite;
 }
 
-.timeline-content {
-  width: 100%;
-  margin-left: 64px;
+/* Hover effect on the dot */
+.timeline-event:hover .timeline-dot {
+  transform: translateX(-50%) scale(1.2); /* Grow dot on hover */
+  box-shadow: 0 0 0 8px rgba(139, 92, 246, 0.4); /* Stronger glow on hover */
 }
 
-.timeline-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px);
-  border-radius: 16px;
+/* The content card that holds event details */
+.timeline-content {
+  width: calc(50% - 40px); /* Takes half the width minus spacing for the dot/line */
   padding: 24px;
+  background: rgba(255, 255, 255, 0.1); /* Your semi-transparent background */
+  backdrop-filter: blur(24px); /* Your blur effect */
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.5s ease;
+  position: relative; /* Needed for the arrow pseudo-element */
+  z-index: 5; /* Ensure card is above other elements */
+}
+
+/* Position content for odd events (left side) */
+.timeline-event:nth-child(odd) .timeline-content {
+  margin-right: 40px; /* Space between card and central line */
+  margin-left: 0; /* Override previous margin-left */
+}
+
+/* Position content for even events (right side) */
+.timeline-event:nth-child(even) .timeline-content {
+  margin-left: 40px; /* Space between card and central line */
+  margin-right: 0; /* Ensure no right margin */
+}
+
+/* Arrow/Connector from card to central line */
+.timeline-content::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  top: 24px; /* Align with the dot's vertical position */
+  z-index: 1; /* Keep arrow above card, but below dot */
+}
+
+/* Arrow for odd-indexed (left-sided) events - points right */
+.timeline-event:nth-child(odd) .timeline-content::after {
+  border-width: 10px 0 10px 10px; /* Creates a right-pointing triangle */
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.1); /* Matches card background */
+  right: -10px; /* Position it at the right edge of the card */
+}
+
+/* Arrow for even-indexed (right-sided) events - points left */
+.timeline-event:nth-child(even) .timeline-content::after {
+  border-width: 10px 10px 10px 0; /* Creates a left-pointing triangle */
+  border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent; /* Matches card background */
+  left: -10px; /* Position it at the left edge of the card */
+}
+
+/* Hover effect for the card (keep as is) */
+.timeline-card {
+  transition: all 0.5s ease;
   cursor: pointer;
+  position: relative; /* Ensure it stacks correctly with hover-bg */
+  overflow: hidden; /* Hide overflowing parts of the hover-bg */
+  z-index: 0; /* Keep content above hover-bg */
 }
 
 .timeline-card:hover {
   transform: scale(1.02);
 }
 
+/* Content within the card (text alignment) */
+.timeline-header,
+.timeline-meta,
+.timeline-institution,
+.timeline-achievement,
+.timeline-description {
+  /* Default alignment to be overridden by nth-child */
+  text-align: left; /* Keep left as default unless specified otherwise */
+}
+
+/* Adjust text alignment for odd-indexed (left-sided) events */
+.timeline-event:nth-child(odd) .timeline-header,
+.timeline-event:nth-child(odd) .timeline-meta,
+.timeline-event:nth-child(odd) .timeline-institution,
+.timeline-event:nth-child(odd) .timeline-achievement,
+.timeline-event:nth-child(odd) .timeline-description {
+  text-align: right;
+}
+
+/* Adjust text alignment for even-indexed (right-sided) events */
+.timeline-event:nth-child(even) .timeline-header,
+.timeline-event:nth-child(even) .timeline-meta,
+.timeline-event:nth-child(even) .timeline-institution,
+.timeline-event:nth-child(even) .timeline-achievement,
+.timeline-event:nth-child(even) .timeline-description {
+  text-align: left;
+}
+
+/* Keep existing styles for .timeline-header, .timeline-icon, .timeline-meta, etc. */
 .timeline-header {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -1569,8 +1685,10 @@ body {
   opacity: 0.1;
 }
 
+
+/* --- Timeline Stats (Keep as is, but adjust margin if needed) --- */
 .timeline-stats {
-  margin-top: 64px;
+  margin-top: 64px; /* Maintained from your original */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
@@ -1599,6 +1717,78 @@ body {
   font-size: 14px;
 }
 
+/* --- Responsive Adjustments for Smaller Screens --- */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px; /* Shift line to the left edge for mobile */
+    transform: none; /* Remove translateX */
+  }
+
+  .timeline-event {
+    flex-direction: row; /* Force all events to be on the right of the line */
+    justify-content: flex-start;
+  }
+
+  .timeline-dot {
+    left: 20px; /* Align dots with the new line position */
+    transform: translateX(-50%); /* Re-center dot on the line */
+  }
+
+  .timeline-event:hover .timeline-dot {
+    transform: translateX(-50%) scale(1.2); /* Maintain hover effect */
+  }
+
+  .timeline-content {
+    width: calc(100% - 60px); /* Adjust width for mobile, considering line + dot space */
+    margin-left: 40px; /* Push content to the right of the line/dot */
+    margin-right: 0; /* Remove any right margin */
+    text-align: left; /* Ensure text is left-aligned on mobile */
+  }
+
+  /* Remove specific alignment for odd/even on mobile, as all are now left-aligned */
+  .timeline-event:nth-child(odd) .timeline-content,
+  .timeline-event:nth-child(even) .timeline-content {
+    margin-left: 40px;
+    margin-right: 0;
+    text-align: left;
+  }
+  .timeline-event:nth-child(odd) .timeline-header,
+  .timeline-event:nth-child(odd) .timeline-meta,
+  .timeline-event:nth-child(odd) .timeline-institution,
+  .timeline-event:nth-child(odd) .timeline-achievement,
+  .timeline-event:nth-child(odd) .timeline-description,
+  .timeline-event:nth-child(even) .timeline-header,
+  .timeline-event:nth-child(even) .timeline-meta,
+  .timeline-event:nth-child(even) .timeline-institution,
+  .timeline-event:nth-child(even) .timeline-achievement,
+  .timeline-event:nth-child(even) .timeline-description {
+    text-align: left;
+  }
+
+  /* Adjust arrow for mobile (all now point from left content to line) */
+  .timeline-content::after {
+    border-width: 10px 10px 10px 0; /* Left-pointing arrow (as content is now on right of line) */
+    border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent; /* Matches card background */
+    left: -10px; /* Position next to card edge */
+    right: auto; /* Remove right positioning */
+  }
+}
+
+/* Ensure the pulse animation is defined somewhere in your CSS if not already */
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+}
 .stat-purple { color: #a855f7; }
 .stat-blue { color: #60a5fa; }
 .stat-green { color: #34d399; }
