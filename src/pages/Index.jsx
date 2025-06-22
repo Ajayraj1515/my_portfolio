@@ -1,6 +1,4 @@
-
-import React from 'react';
-import Hero from '../components/Hero';
+import React, { useEffect, useState } from 'react';
 import FloatingNav from '../components/FloatingNav';
 import About from '../components/About';
 import Skills from '../components/Skills';
@@ -15,9 +13,9 @@ import LoadingScreen from '../components/LoadingScreen';
 import '../styles/main.css';
 
 const Index = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -32,7 +30,7 @@ const Index = () => {
   return (
     <div className="relative min-h-screen">
       <FloatingNav />
-      
+
       <main className="relative">
         <Hero />
         <About />
@@ -44,7 +42,8 @@ const Index = () => {
         <LeetCodeSection />
         <ChatWithMe />
       </main>
-      
+
+      {/* Optional Background Effects */}
       <div className="background-elements">
         <div className="bg-element"></div>
         <div className="bg-element"></div>
