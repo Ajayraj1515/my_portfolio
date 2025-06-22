@@ -2173,9 +2173,13 @@ body {
   }
   
   .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 200px; /* <--- This is the key property for the gap */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
   
   .hero-text {
     align-items: center;
