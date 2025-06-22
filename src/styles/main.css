@@ -145,6 +145,17 @@ body {
   animation-delay: 0.2s;
 }
 
+.main-content-shifted {
+  margin-left: 96px; /* Adjust this value as needed based on your nav's actual width and desired spacing */
+  transition: margin-left 0.5s ease; /* Optional: for smooth transitions if nav hides/shows */
+}
+
+@media (max-width: 768px) {
+  .main-content-shifted {
+    margin-left: 0; /* Remove margin on smaller screens */
+    padding: 0 16px; /* Add some default horizontal padding for content on small screens if needed */
+  }
+}
 /* Floating Navigation */
 .floating-nav {
   position: fixed;
