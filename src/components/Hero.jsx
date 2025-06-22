@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown } from 'lucide-react'; // Make sure 'lucide-react' is installed
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
@@ -29,25 +28,21 @@ const Hero = () => {
         <div className="floating-element"></div>
       </div>
 
-      <div className="container">
-        <div className="hero-content">
-          <div className="hero-text">
-            <div>
-              <h1 className="hero-name">
-                <span className="hero-name-gradient">
-                  Dhamoji
-                </span>
-                <span className="hero-title">
-                  Ajayraj Kattina
-                </span>
-              </h1>
-              
-              <div className="hero-typing">
-                <p className="hero-subtitle">
-                  {typedText}
-                  <span className="typing-cursor">|</span>
-                </p>
-              </div>
+      <div className="container"> {/* This container likely has margin: 0 auto; */}
+        <div className="hero-content"> {/* This is your main image + text grid */}
+          <div className="hero-text"> {/* This is the text content block */}
+            
+            {/* The main name section */}
+            <h1 className="hero-full-name">
+              <span className="hero-name-gradient hero-first-name">Dhamoji</span>
+              <span className="hero-name-gradient hero-last-name">Ajayraj Kattina</span>
+            </h1>
+            
+            <div className="hero-typing">
+              <p className="hero-subtitle">
+                {typedText}
+                <span className="typing-cursor">|</span>
+              </p>
             </div>
 
             <div className="hero-contact">
@@ -78,6 +73,7 @@ const Hero = () => {
             </div>
           </div>
 
+          {/* This is the image section */}
           <div className="hero-image">
             <div className="image-container">
               <div className="image-rings"></div>

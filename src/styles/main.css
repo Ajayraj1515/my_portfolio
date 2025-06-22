@@ -319,20 +319,38 @@ body {
 .hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap:200px;
+  gap:300px;
   align-items: center;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 80px 20px;
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start; /* Aligns content (like the name, details) to the left */
+  
+  text-align: left; /* Ensures all text inside this container is left-aligned */
+  width: 100%;
+}
+.hero-name-primary,
+.hero-name-secondary {
+  display: inline-block; /* Makes them flow next to each other */
+  /* Re-apply the gradient for consistent color */
+  background: linear-gradient(to right, #10b981, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 60px; /* Maintain the large font size */
+  font-weight: bold;
+  line-height: 1; /* Adjust line-height if needed to bring them closer vertically */
 }
 
+.hero-name-primary {
+    margin-right: 15px; /* Adjust spacing between "Dhamoji" and "Ajayraj" */
+}
 .hero-name {
   font-size: 80px;
   font-weight: bold;
@@ -355,10 +373,11 @@ body {
 }
 
 .hero-typing {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 64px; /* Maintain fixed height for animation */
+  width: 100%; /* Ensure it takes full width for proper left alignment */
+  display: flex; /* Keep flex to center the text if it's shorter */
+  justify-content: flex-start; /* Align text to the left */
+  align-items: center; /* Vertically center the text within its height */
 }
 
 .hero-subtitle {
@@ -376,17 +395,19 @@ body {
 }
 
 .contact-item {
-  display: flex;
+  display: flex; /* Keep flex for icon and text */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Align content to the left */
   margin-bottom: 12px;
   color: #d1d5db;
+  width: 100%; /* Take full width to respect parent's left alignment */
 }
 
 .hero-buttons {
   display: flex;
   gap: 16px;
-  justify-content: center;
+  justify-content: flex-start; /* Align buttons to the left */
+  margin-top: 20px; /* Add some space above buttons */
 }
 
 .hero-button {
@@ -2366,7 +2387,17 @@ body {
   
   .hero-content {
     grid-template-columns: 1fr; /* Stack content vertically on smaller screens */
-    gap: 50px; /* Reduce gap when content is stacked */
+    gap: 50px; /* Reduce gap when stacked */
+    padding: 60px 20px; /* Adjust vertical padding */
+  }
+
+  .hero-name-primary,
+  .hero-name-secondary {
+      font-size: 48px; /* Adjust font size for smaller screens */
+  }
+
+  .hero-buttons {
+    justify-content: center; /* Center buttons when text block is centered */
   }
   
   .hero-text {
@@ -2423,6 +2454,12 @@ body {
 }
 
 @media (max-width: 768px) {
+
+  .hero-name-primary,
+  .hero-name-secondary {
+    font-size: 38px; /* Even smaller for mobile */
+  }
+
   .hero-name {
     font-size: 48px;
   }
