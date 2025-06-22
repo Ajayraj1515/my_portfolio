@@ -10,6 +10,7 @@ import FutureGoals from '../components/FutureGoals';
 import LearningTimeline from '../components/LearningTimeline';
 import LeetCodeSection from '../components/LeetCodeSection';
 import ChatWithMe from '../components/ChatWithMe';
+import Hero from '../components/Hero';
 import LoadingScreen from '../components/LoadingScreen';
 import '../styles/main.css';
 
