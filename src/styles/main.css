@@ -1796,61 +1796,7 @@ body {
 }
 
 /* --- Responsive Adjustments for Smaller Screens --- */
-@media (max-width: 768px) {
-  .timeline-line {
-    left: 20px; /* Shift line to the left edge for mobile */
-    transform: none; /* Remove translateX */
-  }
 
-  .timeline-event {
-    flex-direction: row; /* Force all events to be on the right of the line */
-    justify-content: flex-start;
-  }
-
-  .timeline-dot {
-    left: 20px; /* Align dots with the new line position */
-    transform: translateX(-50%); /* Re-center dot on the line */
-  }
-
-  .timeline-event:hover .timeline-dot {
-    transform: translateX(-50%) scale(1.2); /* Maintain hover effect */
-  }
-
-  .timeline-content {
-    width: calc(100% - 60px); /* Adjust width for mobile, considering line + dot space */
-    margin-left: 40px; /* Push content to the right of the line/dot */
-    margin-right: 0; /* Remove any right margin */
-    text-align: left; /* Ensure text is left-aligned on mobile */
-  }
-
-  /* Remove specific alignment for odd/even on mobile, as all are now left-aligned */
-  .timeline-event:nth-child(odd) .timeline-content,
-  .timeline-event:nth-child(even) .timeline-content {
-    margin-left: 40px;
-    margin-right: 0;
-    text-align: left;
-  }
-  .timeline-event:nth-child(odd) .timeline-header,
-  .timeline-event:nth-child(odd) .timeline-meta,
-  .timeline-event:nth-child(odd) .timeline-institution,
-  .timeline-event:nth-child(odd) .timeline-achievement,
-  .timeline-event:nth-child(odd) .timeline-description,
-  .timeline-event:nth-child(even) .timeline-header,
-  .timeline-event:nth-child(even) .timeline-meta,
-  .timeline-event:nth-child(even) .timeline-institution,
-  .timeline-event:nth-child(even) .timeline-achievement,
-  .timeline-event:nth-child(even) .timeline-description {
-    text-align: left;
-  }
-
-  /* Adjust arrow for mobile (all now point from left content to line) */
-  .timeline-content::after {
-    border-width: 10px 10px 10px 0; /* Left-pointing arrow (as content is now on right of line) */
-    border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent; /* Matches card background */
-    left: -10px; /* Position next to card edge */
-    right: auto; /* Remove right positioning */
-  }
-}
 
 /* Ensure the pulse animation is defined somewhere in your CSS if not already */
 @keyframes pulse {
@@ -2437,180 +2383,127 @@ body {
 }
 
 /* Responsive Design */
+/* Responsive Design */
 @media (max-width: 1024px) {
   .floating-nav {
-    display: none;
+    display: none; /* Hides the floating navigation for more screen space */
   }
-  
+
   .hero-content {
-    grid-template-columns: 1fr; /* Stack content vertically on smaller screens */
-    gap: 50px; /* Reduce gap when stacked */
-    padding: 60px 20px; /* Adjust vertical padding */
+    grid-template-columns: 1fr; /* Changes the hero section to a single column (stacks elements) */
+    gap: 50px; /* Adjusts spacing between stacked hero elements */
+    padding: 60px 20px; /* Adjusts padding around the hero section */
   }
 
   .hero-name-primary,
   .hero-name-secondary {
-      font-size: 48px; /* Adjust font size for smaller screens */
+    font-size: 48px; /* Reduces font size of primary/secondary names */
   }
 
   .hero-buttons {
-    justify-content: center;
-    gap: 15px; /* Center buttons when text block is centered */
+    justify-content: center; /* Centers the hero buttons horizontally */
+    gap: 15px; /* Adjusts gap between buttons */
   }
-  
+
   .hero-text {
-    align-items: center;
-    text-align: center;
+    align-items: center; /* Centers content within the hero text block vertically */
+    text-align: center; /* Centers all text within the hero text block */
   }
+
   .hero-full-name {
-      font-size: 48px; /* Adjust font size for smaller screens */
-      flex-direction: column; /* Stack names */
-      align-items: center; /* Center stacked names */
+    font-size: 48px; /* Sets font size for the combined full name */
+    flex-direction: column; /* Stacks parts of the full name vertically */
+    align-items: center; /* Centers stacked name parts */
   }
-  .hero-dhamoji, .hero-typed-name, .hero-kattina-static { /* Apply to all name parts */
-      margin-right: 0; /* Remove horizontal margin between names when stacked */
-      margin-bottom: 5px; /* Add vertical space if stacked */
+
+  .hero-dhamoji,
+  .hero-typed-name,
+  .hero-kattina-static {
+    margin-right: 0; /* Removes horizontal margin between name parts */
+    margin-bottom: 5px; /* Adds vertical space when names are stacked */
   }
-  
+
   .hero-typing {
-    justify-content: center;
+    justify-content: center; /* Centers the typing effect text */
   }
+
   .hero-contact {
-      width: auto; /* Allow contact info to shrink */
+    width: auto; /* Allows contact info width to adjust automatically */
   }
+
   .contact-item {
-    justify-content: center; /* Center contact items when text block is centered */
-    text-align: center;
+    justify-content: center; /* Centers individual contact items */
+    text-align: center; /* Centers text within contact items */
   }
-  
-  .about-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .capabilities-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-  
-  .goal-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
+
+  /* Grid Layouts for Sections - Stacking Columns */
+  .about-content,
+  .skills-grid,
+  .projects-grid,
+  .modal-grid, /* For project modal */
+  .contact-grid, /* For contact methods */
   .leetcode-main {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: 1fr; /* Changes these sections to a single column layout */
   }
-  
+
+  /* Specific Adjustments for nested grids/text alignment */
+  .capabilities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusts min card width */
+  }
+
+  .goal-content {
+    grid-template-columns: 1fr; /* Stacks goal content */
+    text-align: center; /* Centers text in goal content */
+  }
+
   .leetcode-info {
-    text-align: center;
+    text-align: center; /* Centers text in LeetCode info section */
   }
-  
+
   .timeline-header {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
-  .contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stacks timeline header elements */
+    text-align: center; /* Centers text in timeline header */
   }
 }
 
-@media (max-width: 768px) {
 
-  .hero-name-primary,
-  .hero-name-secondary {
-    font-size: 38px; /* Even smaller for mobile */
-  }
-
-  .hero-name {
-    font-size: 48px;
-  }
-  
-  .hero-title {
-    font-size: 32px;
-  }
-  
-  .hero-subtitle {
-    font-size: 18px;
-  }
-  
-  .section-title {
-    font-size: 40px;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-  }
-  
-  .modal-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .timeline-line {
-    left: 16px;
-  }
-  
-  .timeline-dot {
-    left: 16px;
-  }
-  
-  .timeline-content {
-    margin-left: 48px;
-  }
-  
-  .leetcode-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .message-actions {
-    flex-direction: column;
-  }
-}
 
 @media (max-width: 640px) {
   .container {
-    padding: 0 16px;
+    padding: 0 16px; /* Reduces horizontal padding for the main content container */
   }
-  
+
   .section {
-    padding: 60px 0;
+    padding: 60px 0; /* Adjusts vertical padding for all main sections */
   }
-  
+
   .section-header {
-    margin-bottom: 48px;
+    margin-bottom: 48px; /* Reduces bottom margin for section headers */
   }
-  
+
+  /* Further Font Size Reductions */
   .hero-name {
     font-size: 36px;
   }
-  
   .hero-title {
     font-size: 24px;
   }
-  
+
+  /* Grid Adjustments for smaller screens */
   .about-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stacks 'about' statistics */
   }
-  
   .timeline-stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Arranges timeline stats into 2 columns */
   }
-  
+
+  /* Topic Badge adjustments for a tighter fit */
   .topics-grid {
-    gap: 8px;
+    gap: 8px; /* Reduces gap between topic badges */
   }
-  
   .topic-badge {
-    font-size: 12px;
-    padding: 6px 12px;
+    font-size: 12px; /* Reduces font size of topic badges */
+    padding: 6px 12px; /* Adjusts padding of topic badges */
   }
 }
 
@@ -2675,6 +2568,109 @@ a, button, .interactive {
 }
 
 /* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  /* Font Size Adjustments */
+  .hero-name-primary,
+  .hero-name-secondary {
+    font-size: 38px; /* Further reduces hero name font size */
+  }
+  .hero-name {
+    font-size: 48px; /* Ensures general hero name is also scaled */
+  }
+  .hero-title {
+    font-size: 32px; /* Reduces hero title font size */
+  }
+  .hero-subtitle {
+    font-size: 18px; /* Reduces hero subtitle font size */
+  }
+  .section-title {
+    font-size: 40px; /* Reduces main section title font size */
+  }
+
+  /* Button Stacking */
+  .hero-buttons {
+    flex-direction: column; /* Stacks hero buttons vertically for easier tapping */
+  }
+
+  /* --- CRITICAL Timeline Adjustments for Mobile --- */
+  /* This shifts your alternating timeline to a single-column layout */
+  .timeline-line {
+    left: 20px; /* Moves the central timeline line to the left edge */
+    transform: none; /* Removes any previous horizontal centering */
+  }
+
+  .timeline-event {
+    flex-direction: row; /* Forces all events to be on the right of the line */
+    justify-content: flex-start; /* Aligns content to the start of its flex container */
+  }
+
+  .timeline-dot {
+    left: 20px; /* Aligns the interactive dot with the new line position */
+    transform: translateX(-50%); /* Re-centers the dot on the line */
+  }
+
+  .timeline-event:hover .timeline-dot {
+    transform: translateX(-50%) scale(1.2); /* Maintains hover effect on the dot */
+  }
+
+  .timeline-content {
+    width: calc(100% - 60px); /* Adjusts content card width, accounting for line/dot space */
+    margin-left: 40px; /* Pushes content to the right of the line/dot */
+    margin-right: 0; /* Removes any right margin */
+    text-align: left; /* Ensures text is left-aligned on mobile for consistency */
+  }
+
+  /* Removes specific alignment for odd/even events on mobile, as all are now left-aligned */
+  .timeline-event:nth-child(odd) .timeline-content,
+  .timeline-event:nth-child(even) .timeline-content {
+    margin-left: 40px;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  /* Ensures nested text elements also align left */
+  .timeline-event:nth-child(odd) .timeline-header,
+  .timeline-event:nth-child(odd) .timeline-meta,
+  .timeline-event:nth-child(odd) .timeline-institution,
+  .timeline-event:nth-child(odd) .timeline-achievement,
+  .timeline-event:nth-child(odd) .timeline-description,
+  .timeline-event:nth-child(even) .timeline-header,
+  .timeline-event:nth-child(even) .timeline-meta,
+  .timeline-event:nth-child(even) .timeline-institution,
+  .timeline-event:nth-child(even) .timeline-achievement,
+  .timeline-event:nth-child(even) .timeline-description {
+    text-align: left;
+  }
+
+  /* Adjusts the arrow for mobile (all now point from left content to line) */
+  .timeline-content::after {
+    border-width: 10px 10px 10px 0; /* Creates a left-pointing arrow */
+    border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent; /* Matches card background */
+    left: -10px; /* Positions next to the card edge */
+    right: auto; /* Removes right positioning */
+  }
+  /* --- END Timeline Adjustments --- */
+
+  .leetcode-stats {
+    grid-template-columns: 1fr; /* Stacks LeetCode stats into a single column */
+  }
+
+  .message-actions {
+    flex-direction: column; /* Stacks message action buttons */
+  }
+
+  /* --- Performance Optimizations for Mobile --- */
+  /* This is crucial for smooth scrolling and preventing lag on lower-powered devices */
+  .floating-element,
+  .tech-badge,
+  .decoration {
+    animation: none; /* Disables the 'bounce' and other animations for these elements */
+  }
+  .skill-item {
+    animation-delay: 0s; /* Removes staggered animation for skill bars */
+  }
+}
+
 @media (max-width: 768px) {
   .floating-element {
     animation: none;
