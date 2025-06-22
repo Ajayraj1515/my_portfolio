@@ -85,7 +85,7 @@ const Hero = () => {
               
               <div className="profile-image">
                 <img
-                  src="/lovable-uploads/4b169dbd-8f07-46af-9409-37474f631f21.png"
+                  src="https://ik.imagekit.io/4cstjse7i/WhatsApp%20Image%202025-06-22%20at%2011.46.03_af8cc0b4.jpg?updatedAt=1750583213351"
                   alt="Dhamoji Ajayraj Kattina"
                 />
                 
